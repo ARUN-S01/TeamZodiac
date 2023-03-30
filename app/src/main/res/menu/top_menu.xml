@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/AboutUs"
+        android:title="About Us" />
+    <item android:id="@+id/TeamDetails"
+        android:title="Team Star" />
+    <item android:id="@+id/Register"
+        android:title="Join Us?"/>
+    <item android:id="@+id/Help"
+        android:title="Help"/>
+    <item android:id="@+id/Location"
+        android:title="Get Our Locations?"/>
+</menu>

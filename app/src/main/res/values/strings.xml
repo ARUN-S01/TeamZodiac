@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">TeamZodiac</string>
+
+    <string-array name="a">
+        <item>Arun S</item>
+        <item>Developer</item>
+        <item>Hi ! I am an Developer</item><item></item>
+    </string-array>
+
+    <string-array name="s">
+        <item>Shreeram S</item>
+        <item>Team Lead</item>
+        1
+        <item>Hi ! I am an Team Lead </item>
+    </string-array>
+
+    <string-array name="v">
+        <item>Vigneswer Raja E</item>
+        <item>Human Resources</item>
+        <item>Hi ! I am an Human Resources personal</item>
+
+    </string-array>
+
+    <string name="call">Call</string>
+    <string name="message">Message</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl mauris, malesuada quis sollicitudin et, scelerisque at ex. Integer ac dolor nisi. Cras vitae arcu pulvinar, sodales augue ut, convallis arcu. Phasellus non justo imperdiet, facilisis erat dignissim, iaculis lectus. Aliquam ultrices turpis a cursus posuere. Nulla facilisi. Suspendisse potenti. Ut maximus ligula urna, sed aliquam nibh pellentesque sed. Donec viverra accumsan fringilla. Phasellus a sagittis ante. Praesent blandit, ante nec tempor euismod, leo nibh tempor ex, non malesuada tortor lectus non nisl. Nullam id mauris finibus, mattis velit finibus, suscipit felis. Nulla dictum fermentum condimentum. Nulla ut massa urna. Vivamus nec ligula vitae felis varius dictum eget id lectus.</string>
+</resources>

@@ -8,6 +8,15 @@
         android:title="Join Us?"/>
     <item android:id="@+id/Help"
         android:title="Help"/>
+    <item android:id="@+id/Graphics"
+        android:title="Enjoy Graphics?"/>
+    <item android:id="@+id/viedo"
+        android:title="Video About Our Partner"/>
+    <item android:id="@+id/sound"
+        android:title="Play Relaxing Sounds?"/>
     <item android:id="@+id/Location"
         android:title="Get Our Locations?"/>
+    <item android:id="@+id/FranchiseLocation"
+        android:title="Get Partners Location"/>
+
 </menu>

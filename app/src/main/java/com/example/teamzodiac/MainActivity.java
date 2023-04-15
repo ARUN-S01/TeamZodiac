@@ -18,10 +18,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +40,7 @@ import android.widget.Toast;
 import com.example.teamzodiac.RecMembers.Members;
 import com.example.teamzodiac.RecMembers.MembersAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -51,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
     String[] route = {"v","a","s"};
     ProgressDialog progressDoalog;
     private GpsTracker gpsTracker;
+    public static  ArrayList<LatLng> locationArrayList;
+
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         shimmerFrameLayout = findViewById(R.id.ShimmerLayoutChat);
         recyclerView = findViewById(R.id.Recycle);
         registerForContextMenu(recyclerView);
+        locationArrayList = new ArrayList<>();
 
         try {
             if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -105,7 +116,38 @@ public class MainActivity extends AppCompatActivity {
             case R.id.Help:
                 break;
             case R.id.Location:
-                getLocation();
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    OnGPS();
+                } else {
+                    getLocation();
+                }
+                break;
+            case R.id.FranchiseLocation:
+                locationArrayList.clear();
+                LatLng tce = new LatLng(9.882364622456846, 78.08160653896235);
+                LatLng sar = new LatLng(9.90074627858727, 78.09259333927687);
+                LatLng dom = new LatLng(9.920154621917893, 78.09324761012779);
+                LatLng kfc = new LatLng(9.916922961414773, 78.09416563690252);
+
+                locationArrayList.add(tce);
+                locationArrayList.add(sar);
+                locationArrayList.add(dom);
+                locationArrayList.add(kfc);
+                Intent i_ = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i_);
+                break;
+            case R.id.sound:
+                final MediaPlayer mp = MediaPlayer.create(this, R.raw.sound);
+                mp.start();
+                break;
+            case R.id.viedo:
+                Intent vid = new Intent(MainActivity.this,VideoActivity.class);
+                startActivity(vid);
+                break;
+            case R.id.Graphics:
+                Intent grap = new Intent(MainActivity.this,GraphicsActivity.class);
+                startActivity(grap);
                 break;
         }
 
@@ -280,17 +322,44 @@ public class MainActivity extends AppCompatActivity {
 
         return votes;
     }
+    private void getLocation() {
+        locationArrayList.clear();
+        if (ActivityCompat.checkSelfPermission(
+                MainActivity.this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
 
-    public void getLocation(){
-        gpsTracker = new GpsTracker(MainActivity.this);
-        if(gpsTracker.canGetLocation()){
-            double latitude = gpsTracker.getLatitude();
-            double longitude = gpsTracker.getLongitude();
-            Toast.makeText(MainActivity.this, "Latitude :" + latitude +"\n" +
-                    "Longitude :" + longitude, Toast.LENGTH_SHORT).show();
-        }else{
-            gpsTracker.showSettingsAlert();
+                double latitude = locationGPS.getLatitude();
+                double longitude = locationGPS.getLongitude();
+                LatLng loc = new LatLng(latitude, longitude);
+                locationArrayList.add(loc);
+                Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i);
+
+            } else {
+                Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void OnGPS() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new  DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
 

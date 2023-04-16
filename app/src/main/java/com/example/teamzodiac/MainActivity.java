@@ -2,6 +2,7 @@ package com.example.teamzodiac;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -39,14 +40,22 @@ import android.widget.Toast;
 
 import com.example.teamzodiac.RecMembers.Members;
 import com.example.teamzodiac.RecMembers.MembersAdapter;
+import com.example.teamzodiac.SqlDb.Contact;
+import com.example.teamzodiac.SqlDb.DatabaseHandler;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public ShimmerFrameLayout shimmerFrameLayout;
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     LocationManager locationManager;
     private static final int REQUEST_LOCATION = 1;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -70,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.Recycle);
         registerForContextMenu(recyclerView);
         locationArrayList = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
 
         try {
             if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
@@ -148,6 +159,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.Graphics:
                 Intent grap = new Intent(MainActivity.this,GraphicsActivity.class);
                 startActivity(grap);
+                break;
+            case R.id.Cam:
+                Intent cam = new Intent(MainActivity.this,CameraActivity.class);
+                startActivity(cam);
+                break;
+
+            case R.id.DB:
+                SurfSqlDB();
+                break;
+            case R.id.Fire:
+                FirebaseDB("Shreeram","+916385635056");
+                FirebaseDB("Vigneswer Raja","+919842563253");
+                FirebaseDB("Arun","+918122230060");
                 break;
         }
 
@@ -360,6 +384,39 @@ public class MainActivity extends AppCompatActivity {
         });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void SurfSqlDB(){
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.addContact(new Contact("Arun", "8122230060"));
+        db.addContact(new Contact("Shreeram", "6385635056"));
+        db.addContact(new Contact("Vigneswer Raja", "9842563253"));
+
+        List<Contact> contacts = db.getAllContacts();
+        for (Contact cn : contacts) {
+            String log = "Id: " + cn.getID() + " ,Name: " + cn.getName() + " ,Phone: " +
+                    cn.getPhoneNumber();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+    }
+
+    public void FirebaseDB(String name, String num){
+        CollectionReference db_col = db.collection("contacts");
+        Contact con = new Contact(name,num);
+
+        db_col.add(con).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(MainActivity.this, "Contacts Added Successfully",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Error While Adding",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }
 

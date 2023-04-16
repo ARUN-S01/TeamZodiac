@@ -19,4 +19,11 @@
     <item android:id="@+id/FranchiseLocation"
         android:title="Get Partners Location"/>
 
+    <item android:id="@+id/Cam"
+        android:title="Submit your Photo?"/>
+    <item android:id="@+id/DB"
+        android:title="Surf SQL Db"/>
+    <item android:id="@+id/Fire"
+        android:title="Surf Firebase DB"/>
+
 </menu>

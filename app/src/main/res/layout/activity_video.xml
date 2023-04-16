@@ -18,7 +18,7 @@
     <VideoView
         android:id="@+id/VideoView"
         android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:foregroundGravity="center"
         android:padding="30dp"
         android:layout_marginTop="20dp"
@@ -26,5 +26,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/ConnectBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect Bluetooth"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VideoView" />
+    <Button
+        android:id="@+id/ConnectWifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enhance Viedo Connect Wifi?"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConnectBlue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

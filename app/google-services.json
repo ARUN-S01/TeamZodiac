@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "391983698495",
+    "project_id": "fir-con-fb917",
+    "storage_bucket": "fir-con-fb917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391983698495:android:2a6c5bf171d81e8101de8a",
+        "android_client_info": {
+          "package_name": "com.example.firebaseconsole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391983698495-n2es7jgm57il2fb9ggdd94d5jqkpjp05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuWaxf9JxlE9OyZBBGz7mTgocfRExLnH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391983698495-n2es7jgm57il2fb9ggdd94d5jqkpjp05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391983698495:android:cfebcf574e29b91001de8a",
+        "android_client_info": {
+          "package_name": "com.example.teamzodiac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391983698495-n2es7jgm57il2fb9ggdd94d5jqkpjp05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuWaxf9JxlE9OyZBBGz7mTgocfRExLnH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391983698495-n2es7jgm57il2fb9ggdd94d5jqkpjp05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
